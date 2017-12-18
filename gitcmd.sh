@@ -2,19 +2,19 @@
 
 ## Constants
 
-CMD_RemoveAllStoppedContainers="rasc"
+CMD_GetRepoInfo="repo"
 
 ##
 
 show_help()
 {
-  echo "$CMD_RemoveAllStoppedContainers - remove all stopped containers"
+  echo "$CMD_GetRepoInfo - get repository info"
 }
 
 exec_cmd()
 {
-  if [ $1 = $CMD_RemoveAllStoppedContainers ]; then
-    docker rm $(docker ps -a -q)
+  if [ $1 = $CMD_GetRepoInfo ]; then
+    git remote show origin
   else
     echo "unknown command"
   fi
