@@ -3,18 +3,22 @@
 ## Constants
 
 CMD_RemoveAllStoppedContainers="rasc"
+CMD_RemoveAllUntaggedImages="raui"
 
 ##
 
 show_help()
 {
   echo "$CMD_RemoveAllStoppedContainers - remove all stopped containers"
+  echo "$CMD_RemoveAllUntaggedImages - remove all untagged images"
 }
 
 exec_cmd()
 {
   if [ $1 = $CMD_RemoveAllStoppedContainers ]; then
     docker rm $(docker ps -a -q)
+  elif [[ $1 = $CMD_RemoveAllUntaggedImages ]]; then
+    docker rmi $(docker images | grep "^<none>" | awk "{print $3}")
   else
     echo "unknown command"
   fi
